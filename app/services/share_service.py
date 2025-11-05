@@ -34,3 +34,22 @@ class ShareService:
                 status_code=404, detail="Nota no encontrada o no autorizado")
 
         self.shares.remove_note_share(note_id, target_user_id)
+
+    def share_label(self, owner_id: int, label_id: int, target_user_id: int, role: ShareRole):
+        label = self.labels.get(label_id)
+        if not label or label.owner_id != owner_id:
+            raise HTTPException(
+                status_code=404, detail="Etiqueta no encontrada o no autorizado")
+
+        share = self.shares.upsert_label_share(
+            label_id, target_user_id, role.value if hasattr(role, "value") else role)
+
+        return share
+
+    def unshare_label(self, owner_id: int, label_id: int, target_user_id: int):
+        label = self.labels.get(label_id)
+        if not label or label.owner_id != owner_id:
+            raise HTTPException(
+                status_code=404, detail="Etiqueta no encontrada o no autorizado")
+
+        self.shares.remove_label_share(label_id, target_user_id)
