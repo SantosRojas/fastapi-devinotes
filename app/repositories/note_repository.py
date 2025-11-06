@@ -20,13 +20,13 @@ class NoteRepository:
 
     def create(self, note: Note) -> Note:
         self.db.add(note)
-        self.commit()
+        self.db.commit()
         self.db.refresh(note)
         return note
 
     def update(self, note: Note) -> Note:
         self.db.add(note)
-        self.commit()
+        self.db.commit()
         self.db.refresh(note)
         return note
 
