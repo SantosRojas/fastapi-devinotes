@@ -12,5 +12,6 @@ dependencies = [
     "pyjwt>=2.10.1",
     "python-dotenv>=1.2.1",
     "sqlmodel>=0.0.29",
-    "gunicorn"
+    "gunicorn",
+    "psycopg2>=2.9.11",
 ]
